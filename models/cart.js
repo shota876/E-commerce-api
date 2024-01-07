@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const ObjectID = mongoose.Schema.Types.ObjectId
 
 const cartSchema = new mongoose.Schema({
-    owner: {
+    owner : {
         type: ObjectID,
         required: true,
         ref: 'User'
@@ -27,7 +27,10 @@ const cartSchema = new mongoose.Schema({
         required: true,
         default: 0
     }
-}, {timestamps: true})
+}, {
+    timestamps: true
+})
 
 const Cart = mongoose.model('Cart', cartSchema)
+
 module.exports = Cart

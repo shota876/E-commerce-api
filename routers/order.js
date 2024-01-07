@@ -5,19 +5,29 @@ const Cart = require("../models/cart")
 const User = require("../models/user")
 const Auth = require("../middleware/auth")
 
-// First, we get the owner field from the user object on our request, then we use it to find orders for that user.
-// If orders exist, we send them back in descending order, else we send back a 404 stating no orders were found and if any error is encountered, it triggers the catch block.
+
+const router = new express.Router()
+
+
+//const flw = new Flutterwave(process.env.FLUTTERWAVE_V3_PUBLIC_KEY, process.env.FLUTTERWAVE_V3_SECRET_KEY)
+/* 
+commenting that out till I find a fix for flutterwave public key required error
+*/
+
+//get orders
+
 router.get('/orders', Auth, async (req, res) => {
     const owner = req.user._id;
     try {
-    const order = await Order.find({ owner: owner }).sort({ date: -1 });
-    res.status(200).send(order)
+        const order = await Order.find({ owner: owner }).sort({ date: -1 });
+        if(order) {
+            return res.status(200).send(order)
+        }
+        res.status(404).send('No orders found')
     } catch (error) {
-    res.status(500).send()
+        res.status(500).send()
     }
 })
-
-
 
 //checkout
 router.post('/order/checkout', Auth, async(req, res) => {
@@ -77,6 +87,7 @@ router.post('/order/checkout', Auth, async(req, res) => {
     } catch (error) {
         console.log(error)
         res.status(400).send('invalid request')
+        
     }
 })
 
