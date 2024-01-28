@@ -1,7 +1,6 @@
 # Built an E-commerce API with NodeJs, Express and MongoDB
 
-This is an E-commerce API
-it does have all the basic features to get things started
+This is an ecommerce API built with NodeJs. It features authentication, full CRUD ability on products, order, cart and user. Users can create account, login, logout, add products to cart, checkout and view their orders.
 https://shota876.github.io/E-commerce-api/
 
 ## The basic features in this API would be:
